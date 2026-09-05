@@ -138,6 +138,9 @@ video{width:100%;height:100%;max-height:100%;background:#000;border-radius:10px;
   function fetchPlaylist(url){
     document.getElementById("empty").style.display="block";
     document.getElementById("empty").querySelector("b").textContent=t("err")+"…";
+    if(url.indexOf("type=m3u_plus")>=0&&url.indexOf("output=hls")<0&&url.indexOf("output=ts")<0&&url.indexOf("output=m3u8")<0){
+      url=url+(url.indexOf("?")>=0?"&":"?")+"output=hls";
+    }
     var isHttp=/^http:\/\//i.test(url);
     if(isHttp&&location.protocol==="https:"){
       showError("📛 Playlist <b>http://</b> su pagina HTTPS: il browser la blocca (Mixed Content). Usa questo player dal box: nella tua app premi il tasto del <b>Web Server</b> e apri <b>http://IP:8080/player</b> (es. iPhone sulla stessa Wi-Fi).");
