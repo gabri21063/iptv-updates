@@ -138,9 +138,16 @@ video{width:100%;height:100%;max-height:100%;background:#000;border-radius:10px;
   function fetchPlaylist(url){
     document.getElementById("empty").style.display="block";
     document.getElementById("empty").querySelector("b").textContent=t("err")+"…";
+    var isHttp=/^http:\/\//i.test(url);
+    if(isHttp&&location.protocol==="https:"){
+      showError("📛 Playlist <b>http://</b> su pagina HTTPS: il browser la blocca (Mixed Content). Usa questo player dal box: nella tua app premi il tasto del <b>Web Server</b> e apri <b>http://IP:8080/player</b> (es. iPhone sulla stessa Wi-Fi).");
+      return;
+    }
     fetch(url).then(function(r){if(!r.ok)throw new Error(r.status);return r.text()})
       .then(function(text){parsePlaylist(text,url.split("/").pop())})
-      .catch(function(){document.getElementById("empty").querySelector("b").textContent=t("err");});
+      .catch(function(){
+        showError("🎬 " + t("err") + ". Se la lista è <b>http://</b> su pagina HTTPS viene bloccata: usa la versione dal box (vedi app → Web Server → http://IP:8080/player).");
+      });
   }
 
   function parsePlaylist(text,name){
@@ -232,33 +239,55 @@ video{width:100%;height:100%;max-height:100%;background:#000;border-radius:10px;
     });
   }
 
+  var IOS=/iPhone|iPad|iPod/i.test(navigator.userAgent);
+  function hlsVariant(u){
+    var m=u.match(/(\d+)$/);if(m)return u.substring(0,u.length-m[0].length)+m[0]+".m3u8";
+    return u.replace(/\.(ts|m2ts)$/i,".m3u8");
+  }
+
   function play(ch){
     ["#empty"].forEach(function(id){document.getElementById(id).style.display="none"});
     document.querySelectorAll(".ch").forEach(function(el){el.classList.remove("playing")});
     var cards=document.querySelectorAll(".ch");
     cards.forEach(function(el){if(+el.getAttribute("data-id")===ch.id)el.classList.add("playing")});
     clearInterval(window.__retry);
+    window.__retries=0;
     var v=document.getElementById("video");
     var origin=location.protocol||"https:";
-    if(/^http:\/\//i.test(ch.url)&&origin==="https:"){showError("⚠️ Il canale usam un URL **http://** su una pagina HTTPS: i browser lo bloccano (Mixed Content). Serve una playlist HTTPS.");return}
+    if(/^http:\/\//i.test(ch.url)&&origin==="https:"){showError("📛 Canale <b>http://</b> su pagina HTTPS bloccato dal browser (Mixed Content). Apri questo player dal box: app → Web Server → http://IP:8080/player, oppure usa una playlist HTTPS.");return}
+    if(window.__hls)window.__hls.destroy();
+    if(IOS)tryIos(ch,v);
+    else tryBrowser(ch,v);
+  }
+
+  function tryIos(ch,v){
+    var keep=function(){
+      showError("🚫 Canale non avviato. Il server non risponde oppure non supporta HLS per questo canale.");
+    };
+    if(window.__retries>=2){keep();return}
+    var u=window.__retries===0?ch.url:hlsVariant(ch.url);
+    window.__retries++;
+    v.onerror=function(){v.onerror=null;if(/\.m3u8/i.test(u))keep();else tryIos(ch,v)};
+    v.src=u;
+    v.play().catch(function(){if(/\.m3u8/i.test(u))keep();else tryIos(ch,v)});
+  }
+
+  function tryBrowser(ch,v){
     var src=ch.url;
-    if(window.Hls&&Hls.isSupported()&&!isSafariSource(src)){
-      if(v.canPlayType("application/vnd.apple.mpegurl"))src=src;
-      else{
-        if(window.__hls)window.__hls.destroy();
-        var h=new Hls({enableWorker:false});
-        h.on(Hls.Events.ERROR,function(ev,data){
-          if(data.fatal)showError("🚫 Errore canale (HLS): "+(data.type||"")+" "+(data.details||""));
-        });
-        h.loadSource(src);h.attachMedia(v);
-        window.__hls=h;
-        v.play().catch(function(){});
-        return;
-      }
+    var keep=function(){showError("🚫 Errore canale (codice "+v.error.code+"): il server non risponde oppure blocca il browser (User-Agent). Prova un altro canale.")};
+    if(window.Hls&&Hls.isSupported()&&/\.m3u8/i.test(src)){
+      var h=new Hls({enableWorker:false});
+      h.on(Hls.Events.ERROR,function(ev,data){
+        if(data.fatal)showError("🚫 Errore canale (HLS): "+(data.type||"")+" "+(data.details||""));
+      });
+      h.loadSource(src);h.attachMedia(v);
+      window.__hls=h;
+      v.play().catch(function(){});
+      return;
     }
+    v.onerror=function(){v.onerror=null;keep()};
     v.src=src;
-    v.addEventListener("error",function(){showError("🚫 Errore canale (codice "+v.error.code+"): il server non risponde oppure blocca il browser (User-Agent). Prova un altro canale o una playlist HTTPS.")});
-    v.play().catch(function(){showError("⛔ Riproduzione bloccata: il browser ha rifiutato il flusso.")});
+    v.play().catch(keep);
   }
 
   function showError(txt){
