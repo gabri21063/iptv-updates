@@ -40,6 +40,7 @@ aside{width:290px;max-width:40%;overflow-y:auto;background:rgba(0,0,0,.18);paddi
 video{width:100%;height:100%;max-height:100%;background:#000;border-radius:10px;outline:none}
 .empty{color:var(--dim);text-align:center;line-height:1.7;font-size:14px;padding:20px}
 .empty b{display:block;font-size:22px;color:var(--txt);margin-bottom:8px}
+.empty b.err{font-size:14px;color:#ff7b7b;white-space:normal;max-width:640px;padding:8px}
 .hint{font-size:12px;color:var(--dim)}
 @media(max-width:820px){main{flex-direction:column}aside{width:100%;max-width:none;max-height:45%}.video{min-height:200px}}
 </style>
@@ -238,12 +239,17 @@ video{width:100%;height:100%;max-height:100%;background:#000;border-radius:10px;
     cards.forEach(function(el){if(+el.getAttribute("data-id")===ch.id)el.classList.add("playing")});
     clearInterval(window.__retry);
     var v=document.getElementById("video");
+    var origin=location.protocol||"https:";
+    if(/^http:\/\//i.test(ch.url)&&origin==="https:"){showError("⚠️ Il canale usam un URL **http://** su una pagina HTTPS: i browser lo bloccano (Mixed Content). Serve una playlist HTTPS.");return}
     var src=ch.url;
     if(window.Hls&&Hls.isSupported()&&!isSafariSource(src)){
       if(v.canPlayType("application/vnd.apple.mpegurl"))src=src;
       else{
         if(window.__hls)window.__hls.destroy();
-        var h=new Hls();
+        var h=new Hls({enableWorker:false});
+        h.on(Hls.Events.ERROR,function(ev,data){
+          if(data.fatal)showError("🚫 Errore canale (HLS): "+(data.type||"")+" "+(data.details||""));
+        });
         h.loadSource(src);h.attachMedia(v);
         window.__hls=h;
         v.play().catch(function(){});
@@ -251,7 +257,15 @@ video{width:100%;height:100%;max-height:100%;background:#000;border-radius:10px;
       }
     }
     v.src=src;
-    v.play().catch(function(){});
+    v.addEventListener("error",function(){showError("🚫 Errore canale (codice "+v.error.code+"): il server non risponde oppure blocca il browser (User-Agent). Prova un altro canale o una playlist HTTPS.")});
+    v.play().catch(function(){showError("⛔ Riproduzione bloccata: il browser ha rifiutato il flusso.")});
+  }
+
+  function showError(txt){
+    var e=document.getElementById("empty");
+    e.style.display="block";
+    var b=e.querySelector("b");b.className="err";b.textContent="";
+    b.innerHTML=txt;
   }
 
   function isSafariSource(u){
