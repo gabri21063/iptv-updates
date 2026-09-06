@@ -36,6 +36,8 @@ aside{width:290px;max-width:40%;overflow-y:auto;background:rgba(0,0,0,.18);paddi
 .ch.playing{border-color:var(--accent)}
 .ch img{width:30px;height:30px;border-radius:6px;object-fit:contain;background:rgba(0,0,0,.35);flex:0 0 auto}
 .ch b{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ll{background:var(--card);border:1px solid rgba(255,255,255,.15);color:var(--dim);border-radius:8px;padding:8px 12px;font-size:15px;cursor:pointer;line-height:1}
+.ll.on{background:#22c55e;color:#fff;border-color:#22c55e}
 .video{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;min-width:0}
 video{width:100%;height:100%;max-height:100%;background:#000;border-radius:10px;outline:none}
 .empty{color:var(--dim);text-align:center;line-height:1.7;font-size:14px;padding:20px}
@@ -53,6 +55,7 @@ video{width:100%;height:100%;max-height:100%;background:#000;border-radius:10px;
     <div class="sub" data-i18n="sub">Lettore M3U/M3U8 in browser — funziona su iPhone, Android e PC</div>
   </div>
   <div class="spacer"></div>
+  <button class="ll" id="llbtn" title="Ultra-low latency WebRTC">⚡</button>
   <select class="lang" id="lang">
     <option value="it">🇮🇹 Italiano</option>
     <option value="en">🇬🇧 English</option>
@@ -249,6 +252,7 @@ video{width:100%;height:100%;max-height:100%;background:#000;border-radius:10px;
   }
 
   function play(ch){
+    window.__llchan=ch;
     ["#empty"].forEach(function(id){document.getElementById(id).style.display="none"});
     document.querySelectorAll(".ch").forEach(function(el){el.classList.remove("playing")});
     var cards=document.querySelectorAll(".ch");
@@ -305,6 +309,44 @@ video{width:100%;height:100%;max-height:100%;background:#000;border-radius:10px;
   }
 
   function showPlayer(){document.getElementById("empty").style.display="none"}
+
+  function stopLL(){
+    try{if(window.__pc)window.__pc.close()}catch(e){}
+    window.__pc=null;
+    try{var v=document.getElementById("video");if(v.srcObject){v.srcObject.getTracks().forEach(function(t){t.stop()});v.srcObject=null}}catch(e){}
+    var b=document.getElementById("llbtn");b.className="ll";
+  }
+  function startLL(ch,whep){
+    if(window.__pc)stopLL();
+    var v=document.getElementById("video");
+    var pc=new RTCPeerConnection({iceServers:[]});
+    window.__pc=pc;
+    pc.addTransceiver("video",{direction:"recvonly"});
+    pc.addTransceiver("audio",{direction:"recvonly"});
+    pc.ontrack=function(ev){if(ev.streams&&ev.streams[0]){v.srcObject=ev.streams[0];v.play().catch(function(){})}};
+    pc.oniceconnectionstatechange=function(){if(pc.iceConnectionState==="failed"){stopLL();showError("🚫 WebRTC: nessun percorso ICE. Controlla IP/porta WHEP.")}};
+    pc.createOffer().then(function(o){return pc.setLocalDescription(o)}).then(function(){
+      return fetch(whep,{method:"POST",headers:{"Content-Type":"application/sdp"},body:pc.localDescription.sdp});
+    }).then(function(resp){
+      if(!resp.ok)throw new Error("HTTP "+resp.status);
+      var iceUrl=resp.headers.get("Location");
+      return resp.text().then(function(body){return{body:body,iceUrl:iceUrl}});
+    }).then(function(d){
+      pc.setRemoteDescription(new RTCSessionDescription({type:"answer",sdp:d.body}));
+      if(d.iceUrl){pc.onicecandidate=function(e){if(e.candidate)fetch(d.iceUrl,{method:"POST",headers:{"Content-Type":"application/trickle-ice-sdpfrag"},body:e.candidate.candidate}).catch(function(){})}}
+      var b=document.getElementById("llbtn");b.className="ll on";
+    }).catch(function(e){stopLL();showError("🚫 WebRTC error: "+e.message)});
+  }
+  document.getElementById("llbtn").addEventListener("click",function(){
+    if(window.__pc){stopLL();return}
+    if(!window.__llurl){
+      window.__llurl=prompt("URL WHEP del server WebRTC (es. http://IP:8889/sport/whep — per la modalità automatica usa il player dal box: app → Web Server → http://IP:8080/player):",localStorage.getItem("whep")||"");
+      if(window.__llurl)localStorage.setItem("whep",window.__llurl);
+      else return;
+    }
+    if(window.__llchan)startLL(window.__llchan,window.__llurl);
+    else showError("⚡ Seleziona prima un canale.");
+  });
 
   applyLang();
 })();
