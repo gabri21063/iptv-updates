@@ -2,17 +2,18 @@
 
 > Lettore IPTV completo per Android TV / Phone — disponibile in 🇮🇹 🇬🇧 🇩🇪 🇫🇷
 
-**Versione:** 228 (228.0) · **Min SDK:** Android 5.1 (API 22) · **Target:** Android 14 (API 35)
+**Versione:** 229 (229.0) · **Min SDK:** Android 5.1 (API 22) · **Target:** Android 14 (API 35)
 **Stack:** Kotlin · Media3 ExoPlayer 1.3.1 · NanoHTTPD · Firebase Realtime DB · OkHttp · WebRTC/WHEP
 
-[![Download](https://img.shields.io/badge/Download-APK-v228-red)](https://github.com/gabri21063/iptv-updates/releases/download/v228/IPTVPlayer-v228.apk)
+[![Download](https://img.shields.io/badge/Download-APK-v229-red)](https://github.com/gabri21063/iptv-updates/releases/download/v229/IPTVPlayer-v229.apk)
 
 ---
 
 ## 🇮🇹 ITALIANO
 
-### ✨ Novità principali (v217–v228)
+### ✨ Novità principali (v217–v229)
 
+- **🖥️ UI XROM pulita in visione (v229)**: la barra Chiudi e la barra URL/token si nascondono automaticamente mentre guardi un canale — schermo pieno in visione, controlli di nuovo visibili nella home XROM.
 - **🛡️ Scheda XROM TV definitiva (v228)**: niente più 404 — la WebView ora carica il `menu.html` locale estratto dal launcher ufficiale, apre il bridge JS `XromDifesa.apriCanale(v, token)` e carica `omega-engine.php` con `Referer: https://xromitalia.com/`. Stesso User-Agent ufficiale (`xromtv.italia`), tutti i canali del menu funzionano direttamente sul box.
 
 - **🌐 Web Player integrato (v217)**: apri `http://IP_BOX:8080/player` da qualsiasi browser (iPhone, Android, PC) — usa il proxy interno del box, niente blocchi Mixed Content/CORS, funziona con liste HTTP.
@@ -55,7 +56,7 @@ URL relay compatibile con qualsiasi player: `http://<ip>:<port>/peer/proxy?url=<
 - Back-up/ripristino playlist, tema personalizzato, diagnostica
 
 ### 📥 Installazione / Aggiornamento
-1. Scarica l'APK: [IPTVPlayer-v228.apk](https://github.com/gabri21063/iptv-updates/releases/download/v228/IPTVPlayer-v228.apk)
+1. Scarica l'APK: [IPTVPlayer-v229.apk](https://github.com/gabri21063/iptv-updates/releases/download/v229/IPTVPlayer-v229.apk)
 2. Android TV/Box: app **Downloader** → Code `2140263`
 3. Telefono: abilita "Installa app sconosciute" → apri il link → installa
 4. Aggiornamenti successivi: automatici (prompt in-app)
@@ -67,8 +68,9 @@ L'app è un **player**: non fornisce contenuti, canali o playlist. Usa solo font
 
 ## 🇬🇧 ENGLISH
 
-### ✨ Main additions (v217–v228)
+### ✨ Main additions (v217–v229)
 
+- **🖥️ Clean XROM UI while watching (v229)**: Close bar and URL/token bar now auto-hide during playback — full-screen viewing, controls visible again in the XROM home.
 - **🛡️ XROM TV tab fixed for good (v228)**: no more 404 — the WebView now loads the local `menu.html` extracted from the official launcher, exposes the JS bridge `XromDifesa.apriCanale(v, token)` and loads `omega-engine.php` with `Referer: https://xromitalia.com/`. Same official User-Agent (`xromtv.italia`), all menu channels work directly on the box.
 
 - **🌐 Built-in Web Player (v217)**: open `http://BOX_IP:8080/player` from any browser (iPhone, Android, PC) — uses the box's internal proxy, no Mixed Content/CORS blocks, works with HTTP playlists.
@@ -111,7 +113,7 @@ Player-compatible relay URL: `http://<ip>:<port>/peer/proxy?url=<encoded>` · Cl
 - Playlist backup/restore, custom theme, diagnostics
 
 ### 📥 Install / Update
-1. Download the APK: [IPTVPlayer-v228.apk](https://github.com/gabri21063/iptv-updates/releases/download/v228/IPTVPlayer-v228.apk)
+1. Download the APK: [IPTVPlayer-v229.apk](https://github.com/gabri21063/iptv-updates/releases/download/v229/IPTVPlayer-v229.apk)
 2. Android TV/Box: **Downloader** app → Code `2140263`
 3. Phone: enable "Install unknown apps" → open the link → install
 4. Future updates: automatic (in-app prompt)
@@ -123,8 +125,9 @@ The app is a **player**: it does not provide content, channels or playlists. Use
 
 ## 🇩🇪 DEUTSCH
 
-### ✨ Hauptneuerungen (v217–v228)
+### ✨ Hauptneuerungen (v217–v229)
 
+- **🖥️ Saubere XROM-UI beim Ansehen (v229)**: Schließen-Leiste und URL/Token-Leiste werden während der Wiedergabe automatisch ausgeblendet — Vollbild beim Ansehen, Bedienelemente wieder sichtbar im XROM-Startmenü.
 - **🛡️ XROM TV-Register endgültig repariert (v228)**: kein 404 mehr — der WebView lädt jetzt das lokale `menu.html` aus dem offiziellen Launcher, stellt die JS-Bridge `XromDifesa.apriCanale(v, token)` bereit und lädt `omega-engine.php` mit `Referer: https://xromitalia.com/`. Gleiche offizielle User-Agent (`xromtv.italia`), alle Menükanäle laufen direkt auf der Box.
 
 - **🌐 Integrierter Web Player (v217)**: öffne `http://BOX_IP:8080/player` in jedem Browser (iPhone, Android, PC) — nutzt den internen Proxy der Box, keine Mixed Content/CORS-Blockaden, funktioniert mit HTTP-Playlists.
@@ -167,7 +170,7 @@ Player-kompatible Relay-URL: `http://<ip>:<port>/peer/proxy?url=<encoded>` · Cl
 - Playlist-Backup/Wiederherstellung, eigenes Design, Diagnose
 
 ### 📥 Installation / Update
-1. APK herunterladen: [IPTVPlayer-v228.apk](https://github.com/gabri21063/iptv-updates/releases/download/v228/IPTVPlayer-v228.apk)
+1. APK herunterladen: [IPTVPlayer-v229.apk](https://github.com/gabri21063/iptv-updates/releases/download/v229/IPTVPlayer-v229.apk)
 2. Android TV/Box: **Downloader**-App → Code `2140263`
 3. Phone: "Unbekannte Apps installieren" aktivieren → Link öffnen → installieren
 4. Weitere Updates: automatisch (In-App-Hinweis)
@@ -179,8 +182,9 @@ Die App ist ein **Player**: Sie stellt keine Inhalte, Kanäle oder Playlists ber
 
 ## 🇫🇷 FRANÇAIS
 
-### ✨ Nouvelles fonctionnalités (v217–v228)
+### ✨ Nouvelles fonctionnalités (v217–v229)
 
+- **🖥️ Interface XROM propre en visionnage (v229)** : la barre Fermer et la barre URL/jeton se masquent automatiquement pendant la lecture — plein écran en visionnage, commandes à nouveau visibles dans l'accueil XROM.
 - **🛡️ Onglet XROM TV définitivement réparé (v228)** : plus de 404 — la WebView charge désormais le `menu.html` local extrait du lanceur officiel, expose le pont JS `XromDifesa.apriCanale(v, token)` et charge `omega-engine.php` avec `Referer: https://xromitalia.com/`. Même User-Agent officiel (`xromtv.italia`), toutes les chaînes du menu fonctionnent directement sur le boîtier.
 
 - **🌐 Lecteur Web intégré (v217)** : ouvrez `http://IP_BOX:8080/player` depuis n'importe quel navigateur (iPhone, Android, PC) — utilise le proxy interne du boîtier, aucun blocage Mixed Content/CORS, fonctionne avec les playlists HTTP.
@@ -223,7 +227,7 @@ URL de relais compatible lecteur : `http://<ip>:<port>/peer/proxy?url=<encoded>`
 - Sauvegarde/restauration des playlists, thème personnalisé, diagnostic
 
 ### 📥 Installation / Mise à jour
-1. Téléchargez l'APK : [IPTVPlayer-v228.apk](https://github.com/gabri21063/iptv-updates/releases/download/v228/IPTVPlayer-v228.apk)
+1. Téléchargez l'APK : [IPTVPlayer-v229.apk](https://github.com/gabri21063/iptv-updates/releases/download/v229/IPTVPlayer-v229.apk)
 2. Android TV/Box : app **Downloader** → Code `2140263`
 3. Téléphone : activez « Installer les applications inconnues » → ouvrez le lien → installez
 4. Mises à jour suivantes : automatiques (invite dans l'app)
@@ -235,7 +239,7 @@ L'app est un **lecteur** : elle ne fournit ni contenus, ni chaînes, ni playlist
 
 ## 🔗 Link / Links / Links / Liens
 
-- 📥 APK: `https://github.com/gabri21063/iptv-updates/releases/download/v228/IPTVPlayer-v228.apk`
+- 📥 APK: `https://github.com/gabri21063/iptv-updates/releases/download/v229/IPTVPlayer-v229.apk`
 - 🖥 Invia liste al device / Send lists / Listen senden / Envoyer des listes: `https://gbclient.github.io/iptv-client/`
 - ⚡ Bassa latenza WebRTC / Low latency (MediaMTX): `https://github.com/bluenviron/mediamtx/releases`
 - 🔑 Downloader Code: `2140263`
