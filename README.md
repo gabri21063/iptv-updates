@@ -2,17 +2,18 @@
 
 > Lettore IPTV completo per Android TV / Phone — disponibile in 🇮🇹 🇬🇧 🇩🇪 🇫🇷
 
-**Versione:** 230 (230.0) · **Min SDK:** Android 5.1 (API 22) · **Target:** Android 14 (API 35)
+**Versione:** 231 (231.0) · **Min SDK:** Android 5.1 (API 22) · **Target:** Android 14 (API 35)
 **Stack:** Kotlin · Media3 ExoPlayer 1.3.1 · NanoHTTPD · Firebase Realtime DB · OkHttp · WebRTC/WHEP
 
-[![Download](https://img.shields.io/badge/Download-APK-v230-red)](https://github.com/gabri21063/iptv-updates/releases/download/v230/IPTVPlayer-v230.apk)
+[![Download](https://img.shields.io/badge/Download-APK-v231-red)](https://github.com/gabri21063/iptv-updates/releases/download/v231/IPTVPlayer-v231.apk)
 
 ---
 
 ## 🇮🇹 ITALIANO
 
-### ✨ Novità principali (v217–v230)
+### ✨ Novità principali (v217–v231)
 
+- **✅ Menu rapido XROM funzionante (v231)**: fix navigazione − la griglia canali ora si naviga col D-pad e **OK** apre il canale selezionato (la WebView non ruba più i tasti del telecomando).
 - **☰ Menu rapido canali XROM (v230)**: durante la visione premi **MENU (≡)** del telecomando → griglia dei 28 canali sopra il video (nessuna interruzione). Frecce per navigare, OK per cambiare, BACK per tornare al video senza cambi.
 
 - **🖥️ UI XROM pulita in visione (v229)**: la barra Chiudi e la barra URL/token si nascondono automaticamente mentre guardi un canale — schermo pieno in visione, controlli di nuovo visibili nella home XROM.
@@ -58,7 +59,7 @@ URL relay compatibile con qualsiasi player: `http://<ip>:<port>/peer/proxy?url=<
 - Back-up/ripristino playlist, tema personalizzato, diagnostica
 
 ### 📥 Installazione / Aggiornamento
-1. Scarica l'APK: [IPTVPlayer-v230.apk](https://github.com/gabri21063/iptv-updates/releases/download/v230/IPTVPlayer-v230.apk)
+1. Scarica l'APK: [IPTVPlayer-v231.apk](https://github.com/gabri21063/iptv-updates/releases/download/v231/IPTVPlayer-v231.apk)
 2. Android TV/Box: app **Downloader** → Code `2140263`
 3. Telefono: abilita "Installa app sconosciute" → apri il link → installa
 4. Aggiornamenti successivi: automatici (prompt in-app)
@@ -70,8 +71,9 @@ L'app è un **player**: non fornisce contenuti, canali o playlist. Usa solo font
 
 ## 🇬🇧 ENGLISH
 
-### ✨ Main additions (v217–v230)
+### ✨ Main additions (v217–v231)
 
+- **✅ Quick XROM menu working (v231)**: navigation fix − the channel grid now browses with D-pad and **OK** opens the selected channel (WebView no longer steals remote keys).
 - **☰ Quick XROM channel menu (v230)**: while watching, press **MENU (≡)** on the remote → grid of 28 channels over the video (no interruption). D-pad to browse, OK to switch, BACK to return to the video unchanged.
 
 - **🖥️ Clean XROM UI while watching (v229)**: Close bar and URL/token bar now auto-hide during playback — full-screen viewing, controls visible again in the XROM home.
@@ -117,7 +119,7 @@ Player-compatible relay URL: `http://<ip>:<port>/peer/proxy?url=<encoded>` · Cl
 - Playlist backup/restore, custom theme, diagnostics
 
 ### 📥 Install / Update
-1. Download the APK: [IPTVPlayer-v230.apk](https://github.com/gabri21063/iptv-updates/releases/download/v230/IPTVPlayer-v230.apk)
+1. Download the APK: [IPTVPlayer-v231.apk](https://github.com/gabri21063/iptv-updates/releases/download/v231/IPTVPlayer-v231.apk)
 2. Android TV/Box: **Downloader** app → Code `2140263`
 3. Phone: enable "Install unknown apps" → open the link → install
 4. Future updates: automatic (in-app prompt)
@@ -129,8 +131,9 @@ The app is a **player**: it does not provide content, channels or playlists. Use
 
 ## 🇩🇪 DEUTSCH
 
-### ✨ Hauptneuerungen (v217–v230)
+### ✨ Hauptneuerungen (v217–v231)
 
+- **✅ Schnelles XROM-Menü funktioniert (v231)**: Navigations-Fix − das Kanalraster wird jetzt mit dem D-Pad gesteuert und **OK** öffnet den gewählten Kanal (der WebView stiehlt keine Fernbedienungstasten mehr).
 - **☰ Schnelles XROM-Kanalmenü (v230)**: während der Wiedergabe **MENU (≡)** der Fernbedienung drücken → Raster mit 28 Kanälen über dem Video (ohne Unterbrechung). Pfeile zum Navigieren, OK zum Wechseln, BACK zum Rückkehren ohne Änderung.
 
 - **🖥️ Saubere XROM-UI beim Ansehen (v229)**: Schließen-Leiste und URL/Token-Leiste werden während der Wiedergabe automatisch ausgeblendet — Vollbild beim Ansehen, Bedienelemente wieder sichtbar im XROM-Startmenü.
@@ -176,7 +179,7 @@ Player-kompatible Relay-URL: `http://<ip>:<port>/peer/proxy?url=<encoded>` · Cl
 - Playlist-Backup/Wiederherstellung, eigenes Design, Diagnose
 
 ### 📥 Installation / Update
-1. APK herunterladen: [IPTVPlayer-v230.apk](https://github.com/gabri21063/iptv-updates/releases/download/v230/IPTVPlayer-v230.apk)
+1. APK herunterladen: [IPTVPlayer-v231.apk](https://github.com/gabri21063/iptv-updates/releases/download/v231/IPTVPlayer-v231.apk)
 2. Android TV/Box: **Downloader**-App → Code `2140263`
 3. Phone: "Unbekannte Apps installieren" aktivieren → Link öffnen → installieren
 4. Weitere Updates: automatisch (In-App-Hinweis)
@@ -188,8 +191,9 @@ Die App ist ein **Player**: Sie stellt keine Inhalte, Kanäle oder Playlists ber
 
 ## 🇫🇷 FRANÇAIS
 
-### ✨ Nouvelles fonctionnalités (v217–v230)
+### ✨ Nouvelles fonctionnalités (v217–v231)
 
+- **✅ Menu XROM rapide opérationnel (v231)** : correctif de navigation − la grille des chaînes se navigue maintenant avec le D-pad et **OK** ouvre la chaîne sélectionnée (la WebView ne vole plus les touches de la télécommande).
 - **☰ Menu rapide des chaînes XROM (v230)** : pendant la lecture, appuyez sur **MENU (≡)** de la télécommande → grille des 28 chaînes par-dessus la vidéo (sans interruption). Flèches pour naviguer, OK pour changer, BACK pour revenir à la vidéo sans changement.
 
 - **🖥️ Interface XROM propre en visionnage (v229)** : la barre Fermer et la barre URL/jeton se masquent automatiquement pendant la lecture — plein écran en visionnage, commandes à nouveau visibles dans l'accueil XROM.
@@ -235,7 +239,7 @@ URL de relais compatible lecteur : `http://<ip>:<port>/peer/proxy?url=<encoded>`
 - Sauvegarde/restauration des playlists, thème personnalisé, diagnostic
 
 ### 📥 Installation / Mise à jour
-1. Téléchargez l'APK : [IPTVPlayer-v230.apk](https://github.com/gabri21063/iptv-updates/releases/download/v230/IPTVPlayer-v230.apk)
+1. Téléchargez l'APK : [IPTVPlayer-v231.apk](https://github.com/gabri21063/iptv-updates/releases/download/v231/IPTVPlayer-v231.apk)
 2. Android TV/Box : app **Downloader** → Code `2140263`
 3. Téléphone : activez « Installer les applications inconnues » → ouvrez le lien → installez
 4. Mises à jour suivantes : automatiques (invite dans l'app)
@@ -247,7 +251,7 @@ L'app est un **lecteur** : elle ne fournit ni contenus, ni chaînes, ni playlist
 
 ## 🔗 Link / Links / Links / Liens
 
-- 📥 APK: `https://github.com/gabri21063/iptv-updates/releases/download/v230/IPTVPlayer-v230.apk`
+- 📥 APK: `https://github.com/gabri21063/iptv-updates/releases/download/v231/IPTVPlayer-v231.apk`
 - 🖥 Invia liste al device / Send lists / Listen senden / Envoyer des listes: `https://gbclient.github.io/iptv-client/`
 - ⚡ Bassa latenza WebRTC / Low latency (MediaMTX): `https://github.com/bluenviron/mediamtx/releases`
 - 🔑 Downloader Code: `2140263`
