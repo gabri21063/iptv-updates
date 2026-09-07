@@ -5,18 +5,18 @@
 **Versione:** 223 (223.0) · **Min SDK:** Android 5.1 (API 22) · **Target:** Android 14 (API 35)
 **Stack:** Kotlin · Media3 ExoPlayer 1.3.1 · NanoHTTPD · Firebase Realtime DB · OkHttp · WebRTC/WHEP
 
-[![Download](https://img.shields.io/badge/Download-APK-v226-red)](https://github.com/gabri21063/iptv-updates/releases/download/v226/IPTVPlayer-v226.apk)
+[![Download](https://img.shields.io/badge/Download-APK-v227-red)](https://github.com/gabri21063/iptv-updates/releases/download/v227/IPTVPlayer-v227.apk)
 
 ---
 
 ## 🇮🇹 ITALIANO
 
-### ✨ Novità principali (v217–v226)
+### ✨ Novità principali (v217–v227)
 
 - **🌐 Web Player integrato (v217)**: apri `http://IP_BOX:8080/player` da qualsiasi browser (iPhone, Android, PC) — usa il proxy interno del box, niente blocchi Mixed Content/CORS, funziona con liste HTTP.
 - **🔄 Conversione HLS automatica (v218)**: incolli la tua playlist Xtream (`type=m3u_plus`) e il box la converte in HLS (`output=hls`) — i canali partono nativamente su **iPhone Safari**.
-- **📡 Network Quality Monitor (v226)**: overlay in tempo reale con banda stimata (Mbps), bitrate/corrente video, risoluzione e salute buffer. Alert automatico "Connessione lenta — qualità adattata" quando la linea degrada. Cap qualità configurabile per risparmiare banda (impostazione `nqm_max_mbps`).
-- **⚡ Bassa latenza WebRTC (v226)**: canali sport/interattivi a **<1s di latenza** via WebRTC/WHEP nel web player (pulsante ⚡). Integrazione MediaMTX automatica — vedi sezione dedicata sotto.
+- **📡 Network Quality Monitor (v227)**: overlay in tempo reale con banda stimata (Mbps), bitrate/corrente video, risoluzione e salute buffer. Alert automatico "Connessione lenta — qualità adattata" quando la linea degrada. Cap qualità configurabile per risparmiare banda (impostazione `nqm_max_mbps`).
+- **⚡ Bassa latenza WebRTC (v227)**: canali sport/interattivi a **<1s di latenza** via WebRTC/WHEP nel web player (pulsante ⚡). Integrazione MediaMTX automatica — vedi sezione dedicata sotto.
 - **⚡ Avvio canali veloce (v222)**: `bufferForPlaybackMs` 3s (live) / 5s (VOD) — i canali partono in 2–4 secondi, buffer max invariati (60–120s).
 - **🛡️ Suite "connessioni lente" (v220–v221)**: buffer aggressivi ExoPlayer, StreamBroadcaster 800×64KB, HLS proxy cache 5s + retry 3×, keep-alive, playlist retry 3× + timeout 90s.
 - **🔄 XromTV fix (v219, v221)**: cache sempre sovrascritta + apertura automatica dopo install.
@@ -53,7 +53,7 @@ URL relay compatibile con qualsiasi player: `http://<ip>:<port>/peer/proxy?url=<
 - Back-up/ripristino playlist, tema personalizzato, diagnostica
 
 ### 📥 Installazione / Aggiornamento
-1. Scarica l'APK: [IPTVPlayer-v226.apk](https://github.com/gabri21063/iptv-updates/releases/download/v226/IPTVPlayer-v226.apk)
+1. Scarica l'APK: [IPTVPlayer-v227.apk](https://github.com/gabri21063/iptv-updates/releases/download/v227/IPTVPlayer-v227.apk)
 2. Android TV/Box: app **Downloader** → Code `2140263`
 3. Telefono: abilita "Installa app sconosciute" → apri il link → installa
 4. Aggiornamenti successivi: automatici (prompt in-app)
@@ -65,12 +65,12 @@ L'app è un **player**: non fornisce contenuti, canali o playlist. Usa solo font
 
 ## 🇬🇧 ENGLISH
 
-### ✨ Main additions (v217–v226)
+### ✨ Main additions (v217–v227)
 
 - **🌐 Built-in Web Player (v217)**: open `http://BOX_IP:8080/player` from any browser (iPhone, Android, PC) — uses the box's internal proxy, no Mixed Content/CORS blocks, works with HTTP playlists.
 - **🔄 Automatic HLS conversion (v218)**: paste your Xtream playlist (`type=m3u_plus`) and the box auto-converts to HLS (`output=hls`) — channels play natively on **iPhone Safari**.
-- **📡 Network Quality Monitor (v226)**: real-time overlay with estimated bandwidth (Mbps), current video bitrate, resolution and buffer health. Automatic "Slow connection — quality adapted" alert when the line degrades. Configurable quality cap to save bandwidth (`nqm_max_mbps`).
-- **⚡ WebRTC ultra-low latency (v226)**: sports/interactive channels at **<1s latency** via WebRTC/WHEP in the web player (⚡ button). Automatic MediaMTX integration — see dedicated section below.
+- **📡 Network Quality Monitor (v227)**: real-time overlay with estimated bandwidth (Mbps), current video bitrate, resolution and buffer health. Automatic "Slow connection — quality adapted" alert when the line degrades. Configurable quality cap to save bandwidth (`nqm_max_mbps`).
+- **⚡ WebRTC ultra-low latency (v227)**: sports/interactive channels at **<1s latency** via WebRTC/WHEP in the web player (⚡ button). Automatic MediaMTX integration — see dedicated section below.
 - **⚡ Fast channel start (v222)**: `bufferForPlaybackMs` 3s (live) / 5s (VOD) — channels start in 2–4 seconds, max buffers unchanged (60–120s).
 - **🛡️ "Slow connections" suite (v220–v221)**: aggressive ExoPlayer buffers, StreamBroadcaster 800×64KB, HLS proxy 5s cache + 3× retry, keep-alive, playlist retry 3× + 90s timeout.
 - **🔄 XromTV fixes (v219, v221)**: cache always overwritten + auto-open after install.
@@ -107,7 +107,7 @@ Player-compatible relay URL: `http://<ip>:<port>/peer/proxy?url=<encoded>` · Cl
 - Playlist backup/restore, custom theme, diagnostics
 
 ### 📥 Install / Update
-1. Download the APK: [IPTVPlayer-v226.apk](https://github.com/gabri21063/iptv-updates/releases/download/v226/IPTVPlayer-v226.apk)
+1. Download the APK: [IPTVPlayer-v227.apk](https://github.com/gabri21063/iptv-updates/releases/download/v227/IPTVPlayer-v227.apk)
 2. Android TV/Box: **Downloader** app → Code `2140263`
 3. Phone: enable "Install unknown apps" → open the link → install
 4. Future updates: automatic (in-app prompt)
@@ -119,12 +119,12 @@ The app is a **player**: it does not provide content, channels or playlists. Use
 
 ## 🇩🇪 DEUTSCH
 
-### ✨ Hauptneuerungen (v217–v226)
+### ✨ Hauptneuerungen (v217–v227)
 
 - **🌐 Integrierter Web Player (v217)**: öffne `http://BOX_IP:8080/player` in jedem Browser (iPhone, Android, PC) — nutzt den internen Proxy der Box, keine Mixed Content/CORS-Blockaden, funktioniert mit HTTP-Playlists.
 - **🔄 Automatische HLS-Konvertierung (v218)**: füge deine Xtream-Playlist (`type=m3u_plus`) ein und die Box wandelt automatisch in HLS um — Kanäle laufen nativ auf **iPhone Safari**.
-- **📡 Netzwerk-Qualitätsmonitor (v226)**: Echtzeit-Overlay mit geschätzter Bandbreite (Mbps), aktuellem Video-Bitraten, Auflösung und Pufferzustand. Automatischer Alert "Langsame Verbindung — Qualität angepasst" bei absinkender Leitung. Konfigurierbare Qualitätsgrenze zur Bandbreitenersparnis (`nqm_max_mbps`).
-- **⚡ WebRTC Ultra-Niedriglatenz (v226)**: Sport-/Interaktivkanäle mit **<1s Latenz** via WebRTC/WHEP im Web Player (⚡-Taste). Automatische MediaMTX-Integration — siehe Abschnitt unten.
+- **📡 Netzwerk-Qualitätsmonitor (v227)**: Echtzeit-Overlay mit geschätzter Bandbreite (Mbps), aktuellem Video-Bitraten, Auflösung und Pufferzustand. Automatischer Alert "Langsame Verbindung — Qualität angepasst" bei absinkender Leitung. Konfigurierbare Qualitätsgrenze zur Bandbreitenersparnis (`nqm_max_mbps`).
+- **⚡ WebRTC Ultra-Niedriglatenz (v227)**: Sport-/Interaktivkanäle mit **<1s Latenz** via WebRTC/WHEP im Web Player (⚡-Taste). Automatische MediaMTX-Integration — siehe Abschnitt unten.
 - **⚡ Schneller Kanalstart (v222)**: `bufferForPlaybackMs` 3s (live) / 5s (VOD) — Kanäle starten in 2–4 Sekunden, Maximalpuffer unverändert.
 - **🛡️ "Langsame Verbindungen"-Suite (v220–v221)**: aggressive ExoPlayer-Puffer, StreamBroadcaster 800×64KB, HLS-Proxy-Cache 5s + 3× Retry, Keep-Alive, Playlist-Retry 3× + 90s Timeout.
 - **🔄 XromTV-Fixes (v219, v221)**: Cache immer überschrieben + Auto-Öffnen nach Installation.
@@ -161,7 +161,7 @@ Player-kompatible Relay-URL: `http://<ip>:<port>/peer/proxy?url=<encoded>` · Cl
 - Playlist-Backup/Wiederherstellung, eigenes Design, Diagnose
 
 ### 📥 Installation / Update
-1. APK herunterladen: [IPTVPlayer-v226.apk](https://github.com/gabri21063/iptv-updates/releases/download/v226/IPTVPlayer-v226.apk)
+1. APK herunterladen: [IPTVPlayer-v227.apk](https://github.com/gabri21063/iptv-updates/releases/download/v227/IPTVPlayer-v227.apk)
 2. Android TV/Box: **Downloader**-App → Code `2140263`
 3. Phone: "Unbekannte Apps installieren" aktivieren → Link öffnen → installieren
 4. Weitere Updates: automatisch (In-App-Hinweis)
@@ -173,12 +173,12 @@ Die App ist ein **Player**: Sie stellt keine Inhalte, Kanäle oder Playlists ber
 
 ## 🇫🇷 FRANÇAIS
 
-### ✨ Nouvelles fonctionnalités (v217–v226)
+### ✨ Nouvelles fonctionnalités (v217–v227)
 
 - **🌐 Lecteur Web intégré (v217)** : ouvrez `http://IP_BOX:8080/player` depuis n'importe quel navigateur (iPhone, Android, PC) — utilise le proxy interne du boîtier, aucun blocage Mixed Content/CORS, fonctionne avec les playlists HTTP.
 - **🔄 Conversion HLS automatique (v218)** : collez votre playlist Xtream (`type=m3u_plus`) et le boîtier la convertit automatiquement en HLS (`output=hls`) — les chaînes démarrent nativement sur **Safari iPhone**.
-- **📡 Moniteur de qualité réseau (v226)** : superposition en temps réel avec bande passante estimée (Mbps), débit vidéo actuel, résolution et santé du tampon. Alerte automatique "Connexion lente — qualité adaptée" lorsque la ligne se dégrade. Limite de qualité configurable pour économiser la bande passante (`nqm_max_mbps`).
-- **⚡ Basse latence WebRTC (v226)** : chaînes sport/interactives à **<1s de latence** via WebRTC/WHEP dans le lecteur web (bouton ⚡). Intégration automatique MediaMTX — voir la section dédiée ci-dessous.
+- **📡 Moniteur de qualité réseau (v227)** : superposition en temps réel avec bande passante estimée (Mbps), débit vidéo actuel, résolution et santé du tampon. Alerte automatique "Connexion lente — qualité adaptée" lorsque la ligne se dégrade. Limite de qualité configurable pour économiser la bande passante (`nqm_max_mbps`).
+- **⚡ Basse latence WebRTC (v227)** : chaînes sport/interactives à **<1s de latence** via WebRTC/WHEP dans le lecteur web (bouton ⚡). Intégration automatique MediaMTX — voir la section dédiée ci-dessous.
 - **⚡ Démarrage rapide des chaînes (v222)** : `bufferForPlaybackMs` 3s (live) / 5s (VOD) — les chaînes démarrent en 2–4 secondes, tampons max inchangés.
 - **🛡️ Suite "connexions lentes" (v220–v221)** : tampons ExoPlayer agressifs, StreamBroadcaster 800×64KB, proxy HLS cache 5s + retry 3×, keep-alive, chargeur de playlist retry 3× + timeout 90s.
 - **🔄 Correctifs XromTV (v219, v221)** : cache toujours écrasé + ouverture auto après installation.
@@ -215,7 +215,7 @@ URL de relais compatible lecteur : `http://<ip>:<port>/peer/proxy?url=<encoded>`
 - Sauvegarde/restauration des playlists, thème personnalisé, diagnostic
 
 ### 📥 Installation / Mise à jour
-1. Téléchargez l'APK : [IPTVPlayer-v226.apk](https://github.com/gabri21063/iptv-updates/releases/download/v226/IPTVPlayer-v226.apk)
+1. Téléchargez l'APK : [IPTVPlayer-v227.apk](https://github.com/gabri21063/iptv-updates/releases/download/v227/IPTVPlayer-v227.apk)
 2. Android TV/Box : app **Downloader** → Code `2140263`
 3. Téléphone : activez « Installer les applications inconnues » → ouvrez le lien → installez
 4. Mises à jour suivantes : automatiques (invite dans l'app)
@@ -227,7 +227,7 @@ L'app est un **lecteur** : elle ne fournit ni contenus, ni chaînes, ni playlist
 
 ## 🔗 Link / Links / Links / Liens
 
-- 📥 APK: `https://github.com/gabri21063/iptv-updates/releases/download/v226/IPTVPlayer-v226.apk`
+- 📥 APK: `https://github.com/gabri21063/iptv-updates/releases/download/v227/IPTVPlayer-v227.apk`
 - 🖥 Invia liste al device / Send lists / Listen senden / Envoyer des listes: `https://gbclient.github.io/iptv-client/`
 - ⚡ Bassa latenza WebRTC / Low latency (MediaMTX): `https://github.com/bluenviron/mediamtx/releases`
 - 🔑 Downloader Code: `2140263`
