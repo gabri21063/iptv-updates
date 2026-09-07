@@ -2,16 +2,18 @@
 
 > Lettore IPTV completo per Android TV / Phone — disponibile in 🇮🇹 🇬🇧 🇩🇪 🇫🇷
 
-**Versione:** 223 (223.0) · **Min SDK:** Android 5.1 (API 22) · **Target:** Android 14 (API 35)
+**Versione:** 228 (228.0) · **Min SDK:** Android 5.1 (API 22) · **Target:** Android 14 (API 35)
 **Stack:** Kotlin · Media3 ExoPlayer 1.3.1 · NanoHTTPD · Firebase Realtime DB · OkHttp · WebRTC/WHEP
 
-[![Download](https://img.shields.io/badge/Download-APK-v227-red)](https://github.com/gabri21063/iptv-updates/releases/download/v227/IPTVPlayer-v227.apk)
+[![Download](https://img.shields.io/badge/Download-APK-v228-red)](https://github.com/gabri21063/iptv-updates/releases/download/v228/IPTVPlayer-v228.apk)
 
 ---
 
 ## 🇮🇹 ITALIANO
 
-### ✨ Novità principali (v217–v227)
+### ✨ Novità principali (v217–v228)
+
+- **🛡️ Scheda XROM TV definitiva (v228)**: niente più 404 — la WebView ora carica il `menu.html` locale estratto dal launcher ufficiale, apre il bridge JS `XromDifesa.apriCanale(v, token)` e carica `omega-engine.php` con `Referer: https://xromitalia.com/`. Stesso User-Agent ufficiale (`xromtv.italia`), tutti i canali del menu funzionano direttamente sul box.
 
 - **🌐 Web Player integrato (v217)**: apri `http://IP_BOX:8080/player` da qualsiasi browser (iPhone, Android, PC) — usa il proxy interno del box, niente blocchi Mixed Content/CORS, funziona con liste HTTP.
 - **🔄 Conversione HLS automatica (v218)**: incolli la tua playlist Xtream (`type=m3u_plus`) e il box la converte in HLS (`output=hls`) — i canali partono nativamente su **iPhone Safari**.
@@ -53,7 +55,7 @@ URL relay compatibile con qualsiasi player: `http://<ip>:<port>/peer/proxy?url=<
 - Back-up/ripristino playlist, tema personalizzato, diagnostica
 
 ### 📥 Installazione / Aggiornamento
-1. Scarica l'APK: [IPTVPlayer-v227.apk](https://github.com/gabri21063/iptv-updates/releases/download/v227/IPTVPlayer-v227.apk)
+1. Scarica l'APK: [IPTVPlayer-v228.apk](https://github.com/gabri21063/iptv-updates/releases/download/v228/IPTVPlayer-v228.apk)
 2. Android TV/Box: app **Downloader** → Code `2140263`
 3. Telefono: abilita "Installa app sconosciute" → apri il link → installa
 4. Aggiornamenti successivi: automatici (prompt in-app)
@@ -65,7 +67,9 @@ L'app è un **player**: non fornisce contenuti, canali o playlist. Usa solo font
 
 ## 🇬🇧 ENGLISH
 
-### ✨ Main additions (v217–v227)
+### ✨ Main additions (v217–v228)
+
+- **🛡️ XROM TV tab fixed for good (v228)**: no more 404 — the WebView now loads the local `menu.html` extracted from the official launcher, exposes the JS bridge `XromDifesa.apriCanale(v, token)` and loads `omega-engine.php` with `Referer: https://xromitalia.com/`. Same official User-Agent (`xromtv.italia`), all menu channels work directly on the box.
 
 - **🌐 Built-in Web Player (v217)**: open `http://BOX_IP:8080/player` from any browser (iPhone, Android, PC) — uses the box's internal proxy, no Mixed Content/CORS blocks, works with HTTP playlists.
 - **🔄 Automatic HLS conversion (v218)**: paste your Xtream playlist (`type=m3u_plus`) and the box auto-converts to HLS (`output=hls`) — channels play natively on **iPhone Safari**.
@@ -107,7 +111,7 @@ Player-compatible relay URL: `http://<ip>:<port>/peer/proxy?url=<encoded>` · Cl
 - Playlist backup/restore, custom theme, diagnostics
 
 ### 📥 Install / Update
-1. Download the APK: [IPTVPlayer-v227.apk](https://github.com/gabri21063/iptv-updates/releases/download/v227/IPTVPlayer-v227.apk)
+1. Download the APK: [IPTVPlayer-v228.apk](https://github.com/gabri21063/iptv-updates/releases/download/v228/IPTVPlayer-v228.apk)
 2. Android TV/Box: **Downloader** app → Code `2140263`
 3. Phone: enable "Install unknown apps" → open the link → install
 4. Future updates: automatic (in-app prompt)
@@ -119,7 +123,9 @@ The app is a **player**: it does not provide content, channels or playlists. Use
 
 ## 🇩🇪 DEUTSCH
 
-### ✨ Hauptneuerungen (v217–v227)
+### ✨ Hauptneuerungen (v217–v228)
+
+- **🛡️ XROM TV-Register endgültig repariert (v228)**: kein 404 mehr — der WebView lädt jetzt das lokale `menu.html` aus dem offiziellen Launcher, stellt die JS-Bridge `XromDifesa.apriCanale(v, token)` bereit und lädt `omega-engine.php` mit `Referer: https://xromitalia.com/`. Gleiche offizielle User-Agent (`xromtv.italia`), alle Menükanäle laufen direkt auf der Box.
 
 - **🌐 Integrierter Web Player (v217)**: öffne `http://BOX_IP:8080/player` in jedem Browser (iPhone, Android, PC) — nutzt den internen Proxy der Box, keine Mixed Content/CORS-Blockaden, funktioniert mit HTTP-Playlists.
 - **🔄 Automatische HLS-Konvertierung (v218)**: füge deine Xtream-Playlist (`type=m3u_plus`) ein und die Box wandelt automatisch in HLS um — Kanäle laufen nativ auf **iPhone Safari**.
@@ -161,7 +167,7 @@ Player-kompatible Relay-URL: `http://<ip>:<port>/peer/proxy?url=<encoded>` · Cl
 - Playlist-Backup/Wiederherstellung, eigenes Design, Diagnose
 
 ### 📥 Installation / Update
-1. APK herunterladen: [IPTVPlayer-v227.apk](https://github.com/gabri21063/iptv-updates/releases/download/v227/IPTVPlayer-v227.apk)
+1. APK herunterladen: [IPTVPlayer-v228.apk](https://github.com/gabri21063/iptv-updates/releases/download/v228/IPTVPlayer-v228.apk)
 2. Android TV/Box: **Downloader**-App → Code `2140263`
 3. Phone: "Unbekannte Apps installieren" aktivieren → Link öffnen → installieren
 4. Weitere Updates: automatisch (In-App-Hinweis)
@@ -173,7 +179,9 @@ Die App ist ein **Player**: Sie stellt keine Inhalte, Kanäle oder Playlists ber
 
 ## 🇫🇷 FRANÇAIS
 
-### ✨ Nouvelles fonctionnalités (v217–v227)
+### ✨ Nouvelles fonctionnalités (v217–v228)
+
+- **🛡️ Onglet XROM TV définitivement réparé (v228)** : plus de 404 — la WebView charge désormais le `menu.html` local extrait du lanceur officiel, expose le pont JS `XromDifesa.apriCanale(v, token)` et charge `omega-engine.php` avec `Referer: https://xromitalia.com/`. Même User-Agent officiel (`xromtv.italia`), toutes les chaînes du menu fonctionnent directement sur le boîtier.
 
 - **🌐 Lecteur Web intégré (v217)** : ouvrez `http://IP_BOX:8080/player` depuis n'importe quel navigateur (iPhone, Android, PC) — utilise le proxy interne du boîtier, aucun blocage Mixed Content/CORS, fonctionne avec les playlists HTTP.
 - **🔄 Conversion HLS automatique (v218)** : collez votre playlist Xtream (`type=m3u_plus`) et le boîtier la convertit automatiquement en HLS (`output=hls`) — les chaînes démarrent nativement sur **Safari iPhone**.
@@ -215,7 +223,7 @@ URL de relais compatible lecteur : `http://<ip>:<port>/peer/proxy?url=<encoded>`
 - Sauvegarde/restauration des playlists, thème personnalisé, diagnostic
 
 ### 📥 Installation / Mise à jour
-1. Téléchargez l'APK : [IPTVPlayer-v227.apk](https://github.com/gabri21063/iptv-updates/releases/download/v227/IPTVPlayer-v227.apk)
+1. Téléchargez l'APK : [IPTVPlayer-v228.apk](https://github.com/gabri21063/iptv-updates/releases/download/v228/IPTVPlayer-v228.apk)
 2. Android TV/Box : app **Downloader** → Code `2140263`
 3. Téléphone : activez « Installer les applications inconnues » → ouvrez le lien → installez
 4. Mises à jour suivantes : automatiques (invite dans l'app)
@@ -227,7 +235,7 @@ L'app est un **lecteur** : elle ne fournit ni contenus, ni chaînes, ni playlist
 
 ## 🔗 Link / Links / Links / Liens
 
-- 📥 APK: `https://github.com/gabri21063/iptv-updates/releases/download/v227/IPTVPlayer-v227.apk`
+- 📥 APK: `https://github.com/gabri21063/iptv-updates/releases/download/v228/IPTVPlayer-v228.apk`
 - 🖥 Invia liste al device / Send lists / Listen senden / Envoyer des listes: `https://gbclient.github.io/iptv-client/`
 - ⚡ Bassa latenza WebRTC / Low latency (MediaMTX): `https://github.com/bluenviron/mediamtx/releases`
 - 🔑 Downloader Code: `2140263`
