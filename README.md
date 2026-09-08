@@ -5,15 +5,16 @@
 **Versione:** 238 (238.0) · **Min SDK:** Android 5.1 (API 22) · **Target:** Android 14 (API 35)
 **Stack:** Kotlin · Media3 ExoPlayer 1.3.1 · NanoHTTPD · Firebase Realtime DB · OkHttp · WebRTC/WHEP
 
-[![Download](https://img.shields.io/badge/Download-APK-v238-red)](https://github.com/gabri21063/iptv-updates/releases/download/v238/IPTVPlayer-v238.apk)
+[![Download](https://img.shields.io/badge/Download-APK-v239-red)](https://github.com/gabri21063/iptv-updates/releases/download/v239/IPTVPlayer-v239.apk)
 
 ---
 
 ## 🇮🇹 ITALIANO
 
-### ✨ Novità principali (v217–v238)
+### ✨ Novità principali (v217–v239)
 
 - **🛡️ Codice offuscato (v238)**: build R8 con offuscamento reale (rinomina classi/metodi, minificazione, repackaging) − comportamento identico, decodifica molto più difficile; modelli Gson, bridge JS `apriCanale` e componenti manifest conservati.
+- **🔐 Firma + stringhe protette (v239)**: verifica firma a runtime (blocca gli APK ricompilati/ripackati) e cifratura delle stringhe critiche (URL/endpoint XROM, User-Agent, nome bridge JS) con decodifica runtime in memoria.
 - **⏰ Orologio in alto a sinistra (v237)**: orologio di sistema nativo (TextClock) visibile in alto a sinistra durante la visione di tutti i canali, senza interferenze con i controlli del player o il cambio canali.
 - **📌 Pulsante XROM sempre visibile (v236)**: il tasto **XROM ▶** accanto a EPG è fisso — funziona anche **senza playlist caricata** (la barra mostra solo XROM; gli altri filtri compaiono quando carichi una lista). Accesso diretto alla replica XROM da ogni schermata.
 - **🤝 Splash di rispetto XROM (v232)**: all'apertura della scheda XROM una pagina informativa professionale (auto-chiusura 5s con conto alla rovescia, o tasto Continua) riconosce il lavoro del servizio in modo rispettoso — in 4 lingue (IT/EN/DE/FR).
@@ -63,7 +64,7 @@ URL relay compatibile con qualsiasi player: `http://<ip>:<port>/peer/proxy?url=<
 - Back-up/ripristino playlist, tema personalizzato, diagnostica
 
 ### 📥 Installazione / Aggiornamento
-1. Scarica l'APK: [IPTVPlayer-v238.apk](https://github.com/gabri21063/iptv-updates/releases/download/v238/IPTVPlayer-v238.apk)
+1. Scarica l'APK: [IPTVPlayer-v238.apk](https://github.com/gabri21063/iptv-updates/releases/download/v239/IPTVPlayer-v239.apk)
 2. Android TV/Box: app **Downloader** → Code `2140263`
 3. Telefono: abilita "Installa app sconosciute" → apri il link → installa
 4. Aggiornamenti successivi: automatici (prompt in-app)
@@ -75,9 +76,10 @@ L'app è un **player**: non fornisce contenuti, canali o playlist. Usa solo font
 
 ## 🇬🇧 ENGLISH
 
-### ✨ Main additions (v217–v238)
+### ✨ Main additions (v217–v239)
 
 - **🛡️ Obfuscated code (v238)**: real R8 build with renaming, minification and repackaging — same behavior, much harder to decompile; Gson models, `apriCanale` JS bridge and manifest components preserved.
+- **🔐 Signature + protected strings (v239)**: runtime signature verification (blocks re-built / repackaged APKs) and encryption of critical strings (XROM URLs/endpoints, User-Agent, JS bridge name) with runtime in-memory decoding.
 - **⏰ Top-left clock (v237)**: native system clock (TextClock) visible in the top-left corner during playback across all channels, with zero impact on player controls or channel switching.
 - **📌 XROM button always visible (v236)**: the **XROM ▶** button next to EPG is now fixed — it works even **without a loaded playlist** (the bar shows only XROM; the other filters appear once you load a list). Direct access to the XROM replica from every screen.
 - **🤝 XROM respect splash (v232)**: on opening the XROM tab, a professional info page (auto-close 5s with countdown, or Continue button) respectfully acknowledges the service's work — in 4 languages (IT/EN/DE/FR).
@@ -127,7 +129,7 @@ Player-compatible relay URL: `http://<ip>:<port>/peer/proxy?url=<encoded>` · Cl
 - Playlist backup/restore, custom theme, diagnostics
 
 ### 📥 Install / Update
-1. Download the APK: [IPTVPlayer-v238.apk](https://github.com/gabri21063/iptv-updates/releases/download/v238/IPTVPlayer-v238.apk)
+1. Download the APK: [IPTVPlayer-v238.apk](https://github.com/gabri21063/iptv-updates/releases/download/v239/IPTVPlayer-v239.apk)
 2. Android TV/Box: **Downloader** app → Code `2140263`
 3. Phone: enable "Install unknown apps" → open the link → install
 4. Future updates: automatic (in-app prompt)
@@ -139,9 +141,10 @@ The app is a **player**: it does not provide content, channels or playlists. Use
 
 ## 🇩🇪 DEUTSCH
 
-### ✨ Hauptneuerungen (v217–v238)
+### ✨ Hauptneuerungen (v217–v239)
 
 - **🛡️ Verschleierter Code (v238)**: echter R8-Build mit Umbenennung, Minifizierung und Repackaging — gleiches Verhalten, deutlich schwerer zu dekompilieren; Gson-Modelle, `apriCanale`-JS-Bridge und Manifest-Komponenten bleiben erhalten.
+- **🔐 Signatur + geschützte Strings (v239)**: Laufzeit-Signaturprüfung (blockiert neu gebaute/repackte APKs) und Verschlüsselung kritischer Strings (XROM-URLs/Endpunkte, User-Agent, JS-Bridge-Name) mit Entschlüsselung im RAM zur Laufzeit.
 - **⏰ Uhr oben links (v237)**: native Systemuhr (TextClock) oben links bei der Wiedergabe aller Kanäle, ohne Einfluss auf Bedienelemente oder Kanalwechsel.
 - **📌 XROM-Button immer sichtbar (v236)**: der **XROM ▶**-Button neben EPG ist jetzt fest — funktioniert auch **ohne geladene Playlist** (die Leiste zeigt nur XROM; die anderen Filter erscheinen sobald du eine Liste lädst). Direkter Zugriff auf das XROM-Replikat von jedem Bildschirm.
 - **🤝 XROM-Respekt-Splash (v232)**: beim Öffnen des XROM-Tabs eine professionelle Info-Seite (Auto-Schließen nach 5s mit Countdown oder Weiter-Button) würdigt respektvoll die Arbeit des Dienstes — in 4 Sprachen (IT/EN/DE/FR).
@@ -191,7 +194,7 @@ Player-kompatible Relay-URL: `http://<ip>:<port>/peer/proxy?url=<encoded>` · Cl
 - Playlist-Backup/Wiederherstellung, eigenes Design, Diagnose
 
 ### 📥 Installation / Update
-1. APK herunterladen: [IPTVPlayer-v238.apk](https://github.com/gabri21063/iptv-updates/releases/download/v238/IPTVPlayer-v238.apk)
+1. APK herunterladen: [IPTVPlayer-v238.apk](https://github.com/gabri21063/iptv-updates/releases/download/v239/IPTVPlayer-v239.apk)
 2. Android TV/Box: **Downloader**-App → Code `2140263`
 3. Phone: "Unbekannte Apps installieren" aktivieren → Link öffnen → installieren
 4. Weitere Updates: automatisch (In-App-Hinweis)
@@ -203,9 +206,10 @@ Die App ist ein **Player**: Sie stellt keine Inhalte, Kanäle oder Playlists ber
 
 ## 🇫🇷 FRANÇAIS
 
-### ✨ Nouvelles fonctionnalités (v217–v238)
+### ✨ Nouvelles fonctionnalités (v217–v239)
 
 - **🛡️ Code obfusqué (v238)**: version R8 avec renommage, minification et re-packaging — comportement identique, décompilation bien plus difficile ; modèles Gson, pont JS `apriCanale` et composants du manifeste conservés.
+- **🔐 Signature + chaînes protégées (v239)**: vérification de signature au lancement (bloque les APK recompilés/re-packagés) et chiffrement des chaînes critiques (URLs/points de terminaison XROM, User-Agent, nom du pont JS) avec décodage en mémoire à l'exécution.
 - **⏰ Horloge en haut à gauche (v237)**: horloge système native (TextClock) visible en haut à gauche pendant la lecture sur toutes les chaînes, sans aucun impact sur les commandes ou le changement de chaîne.
 - **📌 Bouton XROM toujours visible (v236)** : le bouton **XROM ▶** à côté d'EPG est désormais fixe — il fonctionne même **sans playlist chargée** (la barre n'affiche que XROM ; les autres filtres apparaissent dès qu'une liste est chargée). Accès direct au réplica XROM depuis chaque écran.
 - **🤝 Splash de respect XROM (v232)** : à l'ouverture de l'onglet XROM, une page d'information professionnelle (fermeture auto après 5s avec compte à rebours, ou bouton Continuer) reconnaît respectueusement le travail du service — en 4 langues (IT/EN/DE/FR).
@@ -255,7 +259,7 @@ URL de relais compatible lecteur : `http://<ip>:<port>/peer/proxy?url=<encoded>`
 - Sauvegarde/restauration des playlists, thème personnalisé, diagnostic
 
 ### 📥 Installation / Mise à jour
-1. Téléchargez l'APK : [IPTVPlayer-v238.apk](https://github.com/gabri21063/iptv-updates/releases/download/v238/IPTVPlayer-v238.apk)
+1. Téléchargez l'APK : [IPTVPlayer-v238.apk](https://github.com/gabri21063/iptv-updates/releases/download/v239/IPTVPlayer-v239.apk)
 2. Android TV/Box : app **Downloader** → Code `2140263`
 3. Téléphone : activez « Installer les applications inconnues » → ouvrez le lien → installez
 4. Mises à jour suivantes : automatiques (invite dans l'app)
@@ -267,7 +271,7 @@ L'app est un **lecteur** : elle ne fournit ni contenus, ni chaînes, ni playlist
 
 ## 🔗 Link / Links / Links / Liens
 
-- 📥 APK: `https://github.com/gabri21063/iptv-updates/releases/download/v238/IPTVPlayer-v238.apk`
+- 📥 APK: `https://github.com/gabri21063/iptv-updates/releases/download/v239/IPTVPlayer-v239.apk`
 - 🖥 Invia liste al device / Send lists / Listen senden / Envoyer des listes: `https://gbclient.github.io/iptv-client/`
 - ⚡ Bassa latenza WebRTC / Low latency (MediaMTX): `https://github.com/bluenviron/mediamtx/releases`
 - 🔑 Downloader Code: `2140263`
