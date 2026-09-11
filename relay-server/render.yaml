@@ -1,0 +1,17 @@
+# Render blueprint: crea il web service dal repo (onrender.com, no card sul free tier)
+services:
+  - type: web
+    name: iptv-relay
+    runtime: node
+    repo: https://github.com/gabri21063/iptv-updates
+    plan: free
+    rootDir: relay-server
+    buildCommand: npm install --omit=dev
+    startCommand: node server.js
+    autoDeploy: true
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 3000
+      # - key: AUTH_TOKEN
+      #   sync: false
