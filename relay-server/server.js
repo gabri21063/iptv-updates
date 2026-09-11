@@ -210,7 +210,8 @@ const server = http.createServer((req, res) => {
   if (req.headers.origin) headers['Origin'] = req.headers.origin;
   if (req.headers.cookie) headers['Cookie'] = req.headers.cookie;
 
-  const proxyBase = `http://${req.headers.host}`;
+  const proto = req.headers['x-forwarded-proto'] || (req.socket.encrypted ? 'https' : 'http');
+  const proxyBase = `${proto}://${req.headers.host}`;
 
   function isM3u8(ctype) {
     return (ctype || '').toLowerCase().includes('mpegurl');
