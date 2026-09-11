@@ -62,8 +62,7 @@ const server = http.createServer((req, res) => {
 
   function isM3u8(ctype, urlText) {
     const ct = (ctype || '').toLowerCase();
-    const u = urlText.toLowerCase();
-    return ct.includes('mpegurl') || u.endsWith('.m3u8') || u.includes('/live/');
+    return ct.includes('mpegurl');
   }
 
   function rewriteM3u8(text, upstreamUrl, proxy) {
@@ -88,14 +87,12 @@ const server = http.createServer((req, res) => {
       const loc = proxyRes.headers.location;
       if ([301, 302, 303, 307, 308].includes(code) && loc && hops < 6) {
         proxyRes.resume();
-        const next = [301, 302, 303].includes(code) ? url : url;
-        fetchWithRedirects(new URL(loc, next).href, hops + 1);
+        fetchWithRedirects(new URL(loc, url).href, hops + 1);
         return;
       }
 
       const ctype = proxyRes.headers['content-type'] || '';
       const isPlaylist = isM3u8(ctype, url);
-
       if (isPlaylist) {
         let chunks = [];
         let size = 0;
