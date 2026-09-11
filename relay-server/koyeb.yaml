@@ -1,0 +1,13 @@
+# Koyeb (koyeb.app, free web service). Usa il Dockerfile del repo.
+name: iptv-relay
+services:
+  - name: relay
+    image: ghcr.io/gabri21063/iptv-updates:latest
+    ports:
+      - port: 3000
+        protocols: [http]
+    healthcheck:
+      path: /health
+    routes:
+      - path: /
+        port: 3000
