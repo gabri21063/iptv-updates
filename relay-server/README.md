@@ -4,6 +4,10 @@ Relay proxy per la funzione "Maschera IP" dell'app. A differenza dei worker Clou
 può essere hostato su un IP **non datacenter** (o comunque non bloccato dal provider) → funziona
 anche con provider che bloccano Cloudflare/Vercel.
 
+> **Istanza live**: `https://iptv-relay-cli6.onrender.com` (Render free, Frankfurt) — già
+> configurata come primo server su Firebase RTDB (`/relay/config/servers.json`). I client
+> la usano automaticamente con la maschera attiva.
+
 ## Come funziona
 Il client chiama:
 ```
@@ -13,8 +17,11 @@ Il server scarica lo stream dal provider e lo inoltra **in streaming** (senza bu
 quindi funziona anche sui live `.ts` continui. Il provider vede l'IP del relay, non quello dell'utente.
 
 ## Endpoint
-- `GET /proxy?url=<encoded>` — proxy streaming del flusso
+- `GET /proxy?url=<encoded>` — proxy streaming del flusso (segue i redirect, riscrive le playlist m3u8)
 - `GET /health` — health check
+- `POST /chunk?code=<c>&seq=<n>` — condivisione peer: il coordinatore deposita un pezzo (body raw)
+- `GET /stream?code=<c>` — condivisione peer: streaming dei pezzi (ultimi ~30s in memoria)
+- `GET /info?code=<c>` — stato della stanza peer
 
 ## Test locale
 ```
