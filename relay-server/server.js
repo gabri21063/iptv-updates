@@ -19,6 +19,99 @@ const startedAt = Date.now();
 function activeCount(up) { activeStreams += up; }
 
 // ------------------------------------------------------------------
+// Sessioni "engine" (stile XROM): le credenziali del provider restano
+// sul relay; il device riceve playlists/canali senza mai esporle.
+// Sid -> { host, user, pass, type, cookies, ua, ref, ts }
+// ------------------------------------------------------------------
+const SESS_TTL = 12 * 3600 * 1000;
+const SESS_MAX = 40;
+const sessions = new Map();
+
+function newSid() { return require('crypto').randomBytes(16).toString('hex'); }
+
+function sessionTouch(sid) {
+  const s = sessions.get(sid);
+  if (s) s.ts = Date.now();
+  return s;
+}
+
+function sessionPrune() {
+  const now = Date.now();
+  for (const [k, v] of sessions) if (now - v.ts > SESS_TTL) sessions.delete(k);
+  while (sessions.size > SESS_MAX) {
+    let oldestKey = null, oldestTs = Infinity;
+    for (const [k, v] of sessions) if (v.ts < oldestTs) { oldestTs = v.ts; oldestKey = k; }
+    if (oldestKey === null) break;
+    sessions.delete(oldestKey);
+  }
+}
+
+function parseCookies(setCookieArr) {
+  const out = {};
+  for (const c of setCookieArr || []) {
+    const kv = c.split(';')[0].split('=');
+    if (kv.length === 2) out[kv[0].trim()] = kv[1].trim();
+  }
+  return out;
+}
+
+function cookieHeader(cookies) {
+  return Object.entries(cookies).map(([k, v]) => `${k}=${v}`).join('; ');
+}
+
+function loginFromParams(params) {
+  return new Promise((resolve) => {
+    const hostRaw = (params.get('host') || '').trim().replace(/\/+$/, '');
+    const user = params.get('user') || '';
+    const pass = params.get('pass') || '';
+    const type = (params.get('type') || 'm3u').toLowerCase();
+    const ua = (params.get('ua') || '').trim();
+    const ref = (params.get('ref') || '').trim();
+    if (!hostRaw || !user || !pass) return resolve({ ok: false, msg: 'host/user/pass richiesti' });
+    let base = hostRaw;
+    if (!/^https?:\/\//i.test(base)) base = 'http://' + base;
+    const lib = base.startsWith('https:') ? https : http;
+    const dl = (u) =>
+      `${base}${u}?username=${encodeURIComponent(user)}&password=${encodeURIComponent(pass)}`;
+    const probeUrl = type === 'xtream'
+      ? dl('/player_api.php')
+      : dl('/get.php') + `&type=m3u_plus`;
+    const req = lib.get(probeUrl, {
+      headers: {
+        'User-Agent': ua || 'VLC/3.0.20 LibVLC/3.0.20',
+        Referer: ref || base + '/',
+      },
+      timeout: 20000,
+    }, (res) => {
+      const cookies = parseCookies(res.headers['set-cookie']);
+      let size = 0;
+      res.on('data', (c) => { size += c.length; });
+      res.on('error', () => resolve({ ok: false, msg: 'login error' }));
+      res.on('end', () => {
+        if (res.statusCode >= 400) return resolve({ ok: false, msg: 'login HTTP ' + res.statusCode });
+        if (size === 0) return resolve({ ok: false, msg: 'credenziali non valide' });
+        sessionPrune();
+        const sid = newSid();
+        sessions.set(sid, {
+          host: base, user, pass, type,
+          cookies, ua, ref: ref || base + '/',
+          ts: Date.now(),
+        });
+        resolve({ ok: true, sid });
+      });
+    });
+    req.on('error', () => resolve({ ok: false, msg: 'login unreachable' }));
+    req.on('timeout', () => { req.destroy(); resolve({ ok: false, msg: 'login timeout' }); });
+  });
+}
+
+function proxyLine(proxyPrefix, abs, sess, extra = '') {
+  const q = '?url=' + encodeURIComponent(abs);
+  const tail = sess ? '&sess=' + sess : '';
+  return proxyPrefix + q + tail + (extra ? '&' + extra : '');
+}
+
+// ------------------------------------------------------------------
 // Stato condivisione peer (come il worker CF: niente disco, ultimi ~30s)
 // ------------------------------------------------------------------
 const rooms = new Map(); // code -> { chunks: Map<seq,Buffer>, cur, waiters:[], lastAt }
@@ -59,12 +152,90 @@ const server = http.createServer((req, res) => {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({
       ok: true,
+      v: '281-engine',
       name: process.env.SERVICE_NAME || (req.headers.host || 'relay'),
       active: activeStreams,
       total: totalStreams,
       uptime: Math.round((Date.now() - startedAt) / 1000),
       mem: Math.round(process.memoryUsage().rss / 1024 / 1024),
     }));
+    return;
+  }
+
+  // ------------------------------------------------------------------
+  // Engine: login sul relay (credenziali mai esposte al device)
+  // ------------------------------------------------------------------
+  if (path === '/login') {
+    loginFromParams(parsed.searchParams).then((r) => {
+      res.writeHead(r.ok ? 200 : 400, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify(r));
+    });
+    return;
+  }
+
+  // ------------------------------------------------------------------
+  // /playlist?sess=SID -> m3u_plus riscritta tutta via /proxy (IP relay)
+  // ------------------------------------------------------------------
+  if (path === '/playlist') {
+    const sid = parsed.searchParams.get('sess') || '';
+    const sess = sessionTouch(sid);
+    if (!sess) {
+      res.writeHead(401, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ ok: false, msg: 'sessione non valida' }));
+      return;
+    }
+    const upstream = sess.host + '/get.php?username=' + encodeURIComponent(sess.user) +
+      '&password=' + encodeURIComponent(sess.pass) + '&type=m3u_plus';
+    const lib = sess.host.startsWith('https:') ? https : http;
+    const proto = req.headers['x-forwarded-proto'] || (req.socket.encrypted ? 'https' : 'http');
+    const proxyPrefix = `${proto}://${req.headers.host}/proxy`;
+    const ureq = lib.get(upstream, {
+      headers: {
+        'User-Agent': sess.ua || 'VLC/3.0.20 LibVLC/3.0.20',
+        Referer: sess.ref || sess.host + '/',
+        ...(Object.keys(sess.cookies).length ? { Cookie: cookieHeader(sess.cookies) } : {}),
+      },
+      timeout: 30000,
+    }, (pr) => {
+      if (pr.statusCode >= 400) {
+        pr.resume();
+        res.writeHead(502, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ ok: false, msg: 'provider HTTP ' + pr.statusCode }));
+        return;
+      }
+      const mySess = sid;
+      let parts = [];
+      let size = 0;
+      pr.on('data', (c) => {
+        size += c.length;
+        if (size <= 40 * 1024 * 1024) parts.push(c);
+      });
+      pr.on('error', () => {
+        if (!res.headersSent) { res.writeHead(502, { 'Content-Type': 'text/plain' }); res.end('provider error'); }
+      });
+      pr.on('end', () => {
+        const body = Buffer.concat(parts).toString('utf-8');
+        const out = [];
+        for (const raw of body.split('\n')) {
+          const t = raw.trim();
+          if (t === '' || t.startsWith('#')) { out.push(raw); continue; }
+          let abs;
+          try { abs = new URL(t, sess.host + '/').href; } catch { out.push(raw); continue; }
+          out.push(proxyLine(proxyPrefix, abs, mySess));
+        }
+        const rew = out.join('\n');
+        res.writeHead(200, {
+          'Content-Type': 'application/vnd.apple.mpegurl',
+          'Content-Length': Buffer.byteLength(rew),
+          'Cache-Control': 'no-store',
+        });
+        res.end(rew);
+      });
+    });
+    ureq.on('error', () => {
+      if (!res.headersSent) { res.writeHead(502, { 'Content-Type': 'text/plain' }); res.end('provider unreachable'); }
+    });
+    ureq.on('timeout', () => { ureq.destroy(); });
     return;
   }
 
@@ -227,12 +398,18 @@ const server = http.createServer((req, res) => {
 
   const libFor = (u) => (u.protocol === 'https:' ? https : http);
 
-  const headers = { 'User-Agent': 'IPTVPlayer/1.0' };
+  const sessId = parsed.searchParams.get('sess') || '';
+  const sess = sessId ? sessionTouch(sessId) : null;
+
+  const sessionUa = (sess && sess.ua) || 'IPTVPlayer/1.0';
+  const headers = { 'User-Agent': sessionUa };
   if (req.headers.range) headers['Range'] = req.headers.range;
   if (req.headers['user-agent']) headers['User-Agent'] = req.headers['user-agent'];
   if (req.headers.referer) headers['Referer'] = req.headers.referer;
+  else if (sess) headers['Referer'] = sess.ref || sess.host + '/';
   if (req.headers.origin) headers['Origin'] = req.headers.origin;
   if (req.headers.cookie) headers['Cookie'] = req.headers.cookie;
+  else if (sess && Object.keys(sess.cookies).length) headers['Cookie'] = cookieHeader(sess.cookies);
 
   const proto = req.headers['x-forwarded-proto'] || (req.socket.encrypted ? 'https' : 'http');
   const proxyBase = `${proto}://${req.headers.host}`;
@@ -248,7 +425,7 @@ const server = http.createServer((req, res) => {
       if (line === '' || line.startsWith('#')) { out.push(raw); continue; }
       let abs;
       try { abs = new URL(line, upstreamUrl).href; } catch { out.push(raw); continue; }
-      out.push(proxy + '/proxy?url=' + encodeURIComponent(abs));
+      out.push(proxyLine(proxy + '/proxy', abs, sessId));
     }
     return out.join('\n');
   }
