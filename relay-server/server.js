@@ -10,6 +10,15 @@ const MAX_CHUNK_BODY = 256 * 1024;
 const MAX_KEEP = 48;   // ~30s di buffer per la condivisione peer
 
 // ------------------------------------------------------------------
+// Carico per il balancer: quanti flussi /proxy e /stream sono attivi.
+// L'app legge /status sui vari relay e sceglie il meno carico.
+// ------------------------------------------------------------------
+let activeStreams = 0;
+let totalStreams = 0;
+const startedAt = Date.now();
+function activeCount(up) { activeStreams += up; }
+
+// ------------------------------------------------------------------
 // Stato condivisione peer (come il worker CF: niente disco, ultimi ~30s)
 // ------------------------------------------------------------------
 const rooms = new Map(); // code -> { chunks: Map<seq,Buffer>, cur, waiters:[], lastAt }
@@ -42,6 +51,20 @@ const server = http.createServer((req, res) => {
   if (path === '/health') {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     res.end('ok');
+    return;
+  }
+
+  // Stato del relay per il balancer (carico attivo)
+  if (path === '/status') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({
+      ok: true,
+      name: process.env.SERVICE_NAME || (req.headers.host || 'relay'),
+      active: activeStreams,
+      total: totalStreams,
+      uptime: Math.round((Date.now() - startedAt) / 1000),
+      mem: Math.round(process.memoryUsage().rss / 1024 / 1024),
+    }));
     return;
   }
 
@@ -130,9 +153,10 @@ const server = http.createServer((req, res) => {
     });
     if (typeof res.flushHeaders === 'function') res.flushHeaders();
 
+    activeCount(1); totalStreams++;
     let closed = false;
     const close = () => { if (!closed) { closed = true; res.end(); } };
-    res.on('close', () => { closed = true; });
+    res.on('close', () => { closed = true; activeCount(-1); });
 
     (async () => {
       try {
@@ -233,6 +257,7 @@ const server = http.createServer((req, res) => {
                        'cache-control', 'etag', 'last-modified', 'date'];
 
   // Segue i redirect server-side (hold: il client resta sempre sul relay)
+  activeCount(1); totalStreams++;
   function fetchWithRedirects(url, hops) {
     const proxyReq = libFor(new URL(url)).get(url, { headers, timeout: 20000 }, (proxyRes) => {
       const code = proxyRes.statusCode;
@@ -292,7 +317,7 @@ const server = http.createServer((req, res) => {
 
   fetchWithRedirects(targetUrl.href, 0);
 
-  res.on('close', () => { if (!res.writableFinished) res.destroy(); });
+  res.on('close', () => { activeCount(-1); if (!res.writableFinished) res.destroy(); });
 });
 
 server.listen(PORT, () => {
